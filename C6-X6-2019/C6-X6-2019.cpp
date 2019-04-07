@@ -61,6 +61,16 @@ bool output_sentence(vector<string>& s) {
 	return true;
 	}
 
+// Set of functions to check grammar type of string
+
+bool is_noun(vector<string>& n,string s);
+bool is_verb(vector<string>& v,string s);
+bool is_conjunction(vector<string>& c, string s);
+bool is_article(vector<string>& a, string s);
+
+
+
+
 int main()
 
 try
@@ -69,6 +79,27 @@ try
 	vector<string> sentence_to_test;
 	bool ret_value{ true };
 	bool keep_going{ true };
+
+	vector<string> conjunctions;
+	vector<string> nouns;
+	vector<string> verbs;
+	vector<string> articles;
+
+	// Initialize vectors
+
+	conjunctions.push_back("and");
+	conjunctions.push_back("or");
+	conjunctions.push_back("but");
+	
+	nouns.push_back("birds");
+	nouns.push_back("fish");
+	nouns.push_back("C++");
+
+	verbs.push_back("rules");
+	verbs.push_back("fly");
+	verbs.push_back("swim");
+
+	articles.push_back("the");
 
 	cout << "Welcome to the English Grammar Checker V1.0\n";
 
@@ -80,6 +111,18 @@ try
 		cout << "Enter 'XXX' to terminate program.\n\n > ";
 		keep_going = get_sentence(sentence_to_test);
 		ret_value = output_sentence(sentence_to_test);
+
+		cout << "\nTesting part of grammat checking fucntions\n\n";
+
+		
+		for (auto it = begin(sentence_to_test); it != end(sentence_to_test); ++it) {
+			cout << *it << "\t\tis ";
+			if (is_noun(nouns, *it)) cout << "a noun!\n";
+			else if (is_verb(verbs, *it)) cout << "a verb!\n";
+			else if (is_conjunction(conjunctions, *it)) cout << "a conjunction!\n";
+			else if (is_article(articles, *it)) cout << "an article!\n";
+			else cout << "not in the Grammar!\n\n";
+		}
 	}
 
 
@@ -134,3 +177,32 @@ catch (...) {
 	return 2;
 }
 
+
+bool is_noun(vector<string>& n, string s) {
+	for (auto it = begin(n); it != end(n); ++it) {
+		if (*it == s) return true;
+	}
+	return false;
+}
+
+bool is_verb(vector<string>& n, string s){
+	for (auto it = begin(n); it != end(n); ++it) {
+		if (*it == s) return true;
+	}
+	return false;
+}
+
+bool is_conjunction(vector<string>& n, string s){
+	for (auto it = begin(n); it != end(n); ++it) {
+		if (*it == s) return true;
+	}
+	return false;
+}
+
+bool is_article(vector<string>& n, string s)
+{
+	for (auto it = begin(n); it != end(n); ++it) {
+		if (*it == s) return true;
+	}
+	return false;
+}
